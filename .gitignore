@@ -1,0 +1,133 @@
+# ===========================
+# Java / Maven
+# ===========================
+target/
+*.class
+*.jar
+!releases/*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+hs_err_pid*
+replay_pid*
+
+# Maven wrapper
+.mvn/wrapper/maven-wrapper.jar
+
+# ===========================
+# Node / npm / Frontend
+# ===========================
+node_modules/
+dist/
+.npm
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+.pnpm-debug.log*
+
+# Build outputs
+frontend/dist/
+frontend/build/
+.vite/
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+!.env.example
+
+# ===========================
+# IDE: IntelliJ IDEA
+# ===========================
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+.idea_modules/
+
+# ===========================
+# IDE: VS Code
+# ===========================
+.vscode/
+!.vscode/extensions.json
+!.vscode/launch.json.example
+
+# ===========================
+# IDE: Eclipse
+# ===========================
+.classpath
+.project
+.settings/
+.factorypath
+bin/
+
+# ===========================
+# OS specific
+# ===========================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# ===========================
+# Docker
+# ===========================
+.docker/
+.dockerignore.local
+
+# ===========================
+# Logs
+# ===========================
+*.log
+logs/
+log/
+spring.log
+
+# ===========================
+# Secrets and Certificates
+# ===========================
+*.pem
+*.key
+*.p12
+*.jks
+*.keystore
+*.truststore
+secrets.yml
+!secrets.yml.template
+!k8s/secrets.yml
+
+# ===========================
+# Coverage / Test reports
+# ===========================
+coverage/
+.nyc_output/
+*.lcov
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+
+# ===========================
+# Misc
+# ===========================
+.gradle/
+local.properties
+*.swp
+*.swo
+*~
