@@ -1,0 +1,79 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spyzier-frontend
+  namespace: spyzier
+  labels:
+    app: spyzier-frontend
+    version: v1
+    app.kubernetes.io/part-of: spyzier-fleet-monitoring
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: spyzier-frontend
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: spyzier-frontend
+        version: v1
+        app.kubernetes.io/part-of: spyzier-fleet-monitoring
+    spec:
+      containers:
+        - name: frontend
+          image: ghcr.io/spyzier/spyzier/frontend:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+              name: http
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "50m"
+            limits:
+              memory: "128Mi"
+              cpu: "200m"
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 80
+            initialDelaySeconds: 10
+            periodSeconds: 30
+            timeoutSeconds: 5
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            timeoutSeconds: 3
+            failureThreshold: 3
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 1000
+            allowPrivilegeEscalation: false
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: spyzier-frontend
+  namespace: spyzier
+  labels:
+    app: spyzier-frontend
+    app.kubernetes.io/part-of: spyzier-fleet-monitoring
+spec:
+  type: LoadBalancer
+  selector:
+    app: spyzier-frontend
+  ports:
+    - port: 80
+      targetPort: 80
+      protocol: TCP
+      name: http
