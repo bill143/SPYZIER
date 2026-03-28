@@ -52,10 +52,7 @@ public class DashboardService {
 
         Map<String, Long> vehiclesByType = new HashMap<>();
         for (Vehicle.VehicleType type : Vehicle.VehicleType.values()) {
-            long count = vehicleRepository.findAll().stream()
-                    .filter(v -> v.getType() == type)
-                    .count();
-            vehiclesByType.put(type.name(), count);
+            vehiclesByType.put(type.name(), vehicleRepository.countByType(type));
         }
 
         return DashboardSummaryDTO.builder()

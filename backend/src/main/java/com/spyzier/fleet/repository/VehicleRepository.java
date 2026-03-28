@@ -30,6 +30,8 @@ public interface VehicleRepository extends JpaRepository<Vehicle, Long> {
 
     List<Vehicle> findByTenantIdAndStatus(String tenantId, Vehicle.VehicleStatus status);
 
+    long countByType(Vehicle.VehicleType type);
+
     long countByStatus(Vehicle.VehicleStatus status);
 
     long countByTenantId(String tenantId);
