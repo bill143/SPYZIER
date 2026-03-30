@@ -101,7 +101,12 @@ Transportation Fleet Monitoring System
 git clone https://github.com/SPYZIER/SPYZIER.git
 cd SPYZIER
 
-# Start all services
+# 1. Create your local environment file and set required secrets
+cp .env.example .env
+# Edit .env and change POSTGRES_PASSWORD, REDIS_PASSWORD, and JWT_SECRET
+#   (and optionally GF_SECURITY_ADMIN_PASSWORD for Grafana)
+
+# 2. Start all services
 docker-compose up -d
 
 # View logs
@@ -110,6 +115,15 @@ docker-compose logs -f
 # Stop all services
 docker-compose down
 ```
+
+> **⚠️ Required before first run:** The three variables below have no default
+> and *must* be set in your `.env` file or Docker Compose will refuse to start:
+>
+> | Variable | Description |
+> |---|---|
+> | `POSTGRES_PASSWORD` | PostgreSQL database password |
+> | `REDIS_PASSWORD` | Redis cache password |
+> | `JWT_SECRET` | JWT signing secret — at least 256 bits (32 bytes / 64 hex chars). Generate: `openssl rand -hex 32` |
 
 ### Access the application
 
